@@ -103,19 +103,19 @@ open class TinyConsoleController: UIViewController {
         for view in view.subviews {
             view.removeFromSuperview()
         }
-        for childViewController in children {
-            childViewController.removeFromParent()
+        for childViewController in childViewControllers {
+            childViewController.removeFromParentViewController()
         }
         
-        addChild(consoleViewController)
+        addChildViewController(consoleViewController)
         consoleViewController.view.frame = consoleFrame
         view.addSubview(consoleViewController.view)
-        consoleViewController.didMove(toParent: self)
+        consoleViewController.didMove(toParentViewController: self)
         
-        addChild(rootViewController)
+        addChildViewController(rootViewController)
         rootViewController.view.frame = CGRect(x: consoleFrame.minX, y: consoleFrame.maxY, width: view.bounds.width, height: 120)
         view.addSubview(rootViewController.view)
-        rootViewController.didMove(toParent: self)
+        rootViewController.didMove(toParentViewController: self)
     }
     
     private func setupConstraints() {
