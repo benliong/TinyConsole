@@ -40,20 +40,20 @@ class TinyConsoleViewController: UIViewController {
         }
     }
     
-    func customText(sender: UITapGestureRecognizer) {
-        let alert = UIAlertController(title: "Custom Log", message: "Enter text you want to log.", preferredStyle: UIAlertControllerStyle.alert)
+    @objc func customText(sender: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: "Custom Log", message: "Enter text you want to log.", preferredStyle: .alert)
         alert.addTextField { (textField: UITextField) in
             textField.keyboardType = .alphabet
         }
         
-        let okAction = UIAlertAction(title: "Add log", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "Add log", style: .default) {
             (action: UIAlertAction) in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
                 TinyConsole.print(text)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -84,12 +84,12 @@ class TinyConsoleViewController: UIViewController {
         view.addGestureRecognizer(showAdditionalActionsGesture)
     }
     
-    func additionalActions(sender: UITapGestureRecognizer) {
+    @objc func additionalActions(sender: UITapGestureRecognizer) {
         
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let defaultActions = [
-            UIAlertAction(title: "Send Email", style: UIAlertActionStyle.default) {
+            UIAlertAction(title: "Send Email", style: .default) {
                 (action: UIAlertAction) in
                 DispatchQueue.main.async {
                     guard let text = TinyConsole.shared.textView?.text else {
@@ -102,7 +102,7 @@ class TinyConsoleViewController: UIViewController {
                     self.present(composeViewController, animated: true, completion: nil)
                 }
             },
-            UIAlertAction(title: "Clear", style: UIAlertActionStyle.destructive) {
+            UIAlertAction(title: "Clear", style: .destructive) {
                 (action: UIAlertAction) in
                 TinyConsole.clear()
             }
@@ -112,13 +112,13 @@ class TinyConsoleViewController: UIViewController {
         }
         
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }
     
-    func addMarker(sender: UISwipeGestureRecognizer) {
+    @objc func addMarker(sender: UISwipeGestureRecognizer) {
         TinyConsole.addMarker()
     }
 }
